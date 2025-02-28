@@ -1,0 +1,7 @@
+{
+  "name": "bouldern",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
