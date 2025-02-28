@@ -48,7 +48,7 @@ const deleteSessionAndRefresh = async (index: number) => {
         <div class="spacing"/>
         <IonButton class="add" @click="addSession">Add Session</IonButton>
         <div class="card" v-for="(session, i) in sessions" :key="i">
-          <IonButton class="item" color="secondary" @click="() => openSession(i)"><SessionCard :session="session"/></IonButton>
+          <IonButton class="item" color="secondary" @click="() => openSession(i)"><SessionCard :session="session" :unique-id="i"/></IonButton>
           <IonButton class="delete" color="danger" @click="() => deleteSessionAndRefresh(i)"><img class="trash" src="../assets/trash.svg"/></IonButton>
         </div>
       </div>

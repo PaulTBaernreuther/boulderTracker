@@ -1,8 +1,8 @@
 <template>
   <div>
-      <ion-datetime-button class="date-button" format="yyyy-mm-dd"  datetime="datetime" ></ion-datetime-button>
+      <ion-datetime-button class="date-button" format="yyyy-mm-dd"  :datetime="datetimeId" ></ion-datetime-button>
       <ion-modal v-show="false" :keep-contents-mounted="true">
-        <ion-datetime  id="datetime" presentation="date" :value="session.date" ></ion-datetime>
+        <ion-datetime  :id="datetimeId" presentation="date" :value="session.date" ></ion-datetime>
       </ion-modal>
     <span>
       {{ formatTops(session.tops) }}
@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Session } from './sessions';
 import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/vue';
 
@@ -27,7 +28,8 @@ const formatTops = (tops: Session["tops"]) => {
   return formatted || "Nix";
 }
 
-defineProps<{session: Session}>();
+const props = defineProps<{session: Session, uniqueId: number}>();
+const datetimeId = computed(() => `datetime_${props.uniqueId}`)
 </script>
 
 <style scoped>

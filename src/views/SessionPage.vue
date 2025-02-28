@@ -50,6 +50,13 @@ const saveSession = async () => {
   router.push("/home")
 };
 
+const datetimeModal = ref<null | {$el: { dismiss: () => void}}>(null);
+
+const onDatetimeSelect = (datetime: string) => {
+  selectedDate.value = datetime;
+  datetimeModal.value!.$el.dismiss()
+}
+
 </script>
 
 <template>
@@ -65,8 +72,8 @@ const saveSession = async () => {
           <ion-label>Date:</ion-label>
 
           <ion-datetime-button datetime="datetime"></ion-datetime-button>
-          <ion-modal :keep-contents-mounted="true">
-            <ion-datetime id="datetime" format="yyyy-mm-dd" v-model="selectedDate" presentation="date" preferWheel="false"></ion-datetime>
+          <ion-modal ref="datetimeModal" :keep-contents-mounted="true">
+            <ion-datetime id="datetime" format="yyyy-mm-dd" :model-value="selectedDate" @update:model-value="onDatetimeSelect" presentation="date" preferWheel="false"></ion-datetime>
           </ion-modal>
         </ion-item>
         <ion-grid>
